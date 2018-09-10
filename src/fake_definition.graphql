@@ -98,6 +98,7 @@ enum fake__Types {
   email
   url
   domainName
+  githubProject
   ipv4Address
   ipv6Address
   userAgent

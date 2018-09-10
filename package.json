@@ -11,8 +11,10 @@
     "build:editor": "cd src/editor && yarn && npm run build && cd -",
     "build:typescript": "tsc",
     "copy:graphql": "cp src/*.graphql dist/",
-    "copy:editor": "mkdir -p dist/editor && cp src/editor/*.{html,js,css,svg} dist/editor",
-    "build:all": "npm run build:editor && npm run build:typescript && npm run copy:graphql && npm run copy:editor"
+    "copy:editor": "mkdir -p dist/editor && cp 'src/editor/*.{html,js,css,svg}' dist/editor",
+    "build:all": "npm run build:editor && npm run build:typescript && npm run copy:graphql && npm run copy:editor",
+    "now-build": "npm run build:all",
+    "now-start": "node dist/index.js"
   },
   "repository": {
     "type": "git",

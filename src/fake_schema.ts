@@ -179,7 +179,7 @@ function fieldResolver(type:GraphQLOutputType, field) {
 
 function arrayResolver(itemResolver) {
   return (...args) => {
-    let length = getRandomInt(2, 4);
+    let length = getRandomInt(4, 20);
     const result = [];
 
     while (length-- !== 0)
