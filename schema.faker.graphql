@@ -103,7 +103,7 @@ type Repository {
   owner: GithubAccount!
   # name: String!
   # default_branch: String!
-  full_name: String! @fake(type:uuid)
+  full_name: String! @fake(type:githubProject)
   # private: Boolean
   # fork: Boolean
   # permissions: RepositoryPermissions
