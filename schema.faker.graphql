@@ -1,0 +1,143 @@
+# 
+#  {
+#    view {
+#      id
+#      sites {
+#        name
+#        repository {
+#          full_name
+#          owner {
+#            login
+#            avatar_url
+#          }
+#        }
+#        builds {
+#          sitename
+#          repository_sha
+#          started_at
+#          status
+#        }
+#        releases {
+#          released_at
+#        }
+#      }
+#    }
+#  }
+#
+
+# There are two directives you can use to enhance fake data:
+#   - @fake
+#   - @examples
+# Each directive has autocompletion working so start by typing @
+#
+# Press save or Cmd+Enter to apply the changes and update server. Switch to GraphiQL
+# on the left panel to immediately test your changes.
+# This tool also supports extending existing APIs. Check graphql-faker --help
+#
+# Developed with ❤️ by APIs.guru | https://github.com/APIs-guru/graphql-faker
+
+# type Company {
+#   name: String @fake(type:companyName)
+#   industry: String @examples(values: ["IT", "Manufacturing", "Medicine", "Media"])
+#   employees: [Employee!]
+# }
+
+# type Employee {
+#   firstName: String @fake(type: firstName, locale:en_CA)
+#   lastName: String @fake(type: lastName, locale:en_CA)
+#   address: String @fake(type:streetAddress, options: { useFullAddress: true })
+#   subordinates: [Employee!]
+#   company: Company
+# }
+
+type Query {
+  view: View
+}
+
+type View {
+	id: String @fake(type:uuid)
+  github: Github
+  # site(name: String!): Site
+  sites: [Site]
+  siteNames: [String] @fake(type: domainName)
+  details: UserDetails
+}
+
+type UserDetails {
+  name: String @fake(type:fullName)
+  avatar_url: String @fake(type:avatarUrl)
+  external_profile_url: String @fake(type:url)
+  last_login: String @fake(type: recentDate, options:{dateFormat:"x"})
+  email: String @fake(type: email)
+  #location: String
+}
+
+type Github {
+  installations: [Installation] 
+  # repository(name: String!): Repository 
+}
+
+type Installation {
+  id: Int
+}
+
+type Site {
+  name: String! @fake(type: domainName)
+  repository: Repository
+  # path: String
+  # build_cmd: String
+  # static_build_cmd: String
+  # static_build_output: String
+  builds: [Build]
+  # build(repository_sha: String!): Build
+  # bundles: [Bundle]
+  # bundle(bundle_id: String!): Bundle
+  # environments: [Environment]
+  # environment(env_name: String!): Environment
+  releases: [Release]
+  # settings: SiteSettings
+}
+
+type Repository {
+  id: String! @fake(type:uuid)
+  owner: GithubAccount!
+  # name: String!
+  # default_branch: String!
+  full_name: String! @fake(type:uuid)
+  # private: Boolean
+  # fork: Boolean
+  # permissions: RepositoryPermissions
+  # pushed_at: String
+  # packages: [Package]
+}
+
+type GithubAccount {
+  login: String! @fake(type:githubProject)
+  avatar_url: String @fake(type:avatarUrl)
+}
+
+type Build {
+  # buildCmd: String
+  # bundle_id: String
+  # finished_at: String
+  # log: String
+  # logs: [BuildLog]
+  # path: String
+  # repository: String
+  repository_sha: String @examples(values: ["2f58a7f4fc230609756b97f16bd3615df1c162d4","83e4457b5ff9117c03c5a866074643bc89da6d47", "0eceeea3d7b524b2adbfeffac889aead72e88031", "64ffc0acc6ff36d07d0d8f58c6ddc9d77f566069"])
+  # s3key: String
+  sitename: String
+  started_at: String @fake(type: recentDate, options:{dateFormat:"x"})
+  status: String @examples(values: ["success","success","success","success","success","success","success","success","success","success","success","success","failed","pending"])
+}
+
+type Release {
+  # hostname: String
+  # bundle_id: String
+  # environment: String
+  # sitename: String
+  released_at: String @fake(type: recentDate, options:{dateFormat:"x"})
+  # version: Int
+  # type: String
+}
+
