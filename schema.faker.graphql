@@ -103,7 +103,7 @@ type Repository {
   owner: GithubAccount!
   # name: String!
   # default_branch: String!
-  full_name: String! @fake(type:uuid)
+  full_name: String! @fake(type:githubProject)
   # private: Boolean
   # fork: Boolean
   # permissions: RepositoryPermissions
@@ -129,6 +129,8 @@ type Build {
   sitename: String
   started_at: String @fake(type: recentDate, options:{dateFormat:"x"})
   status: String @examples(values: ["success","success","success","success","success","success","success","success","success","success","success","success","failed","pending"])
+  branch: String @examples(values: ["master", "development"])
+  commit_message: String @fake(type: words)
 }
 
 type Release {
